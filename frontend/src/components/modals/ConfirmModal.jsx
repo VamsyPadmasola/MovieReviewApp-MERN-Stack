@@ -13,9 +13,9 @@ export default function ConfirmModal({ busy, onConfirm, onCancel, title, subtitl
             hideClose={true}>
             <div className='dark:bg-primary bg-white rounded p-1'>
                 <h1 className='text-red-400 font-semibold text-lg'>{title}</h1>
-                <p className='dark:text-white text-primary text-sm'>
+                <p className='text-black text-sm'>
                     {subtitle}</p>
-                <div className='flex items-center justify-between'>
+                <div className='flex items-center justify-between mt-5'>
                     {busy
                         ?
                         <p className='dark:text-white text-primary flex items-center space-x-2 mt-3'>
@@ -24,10 +24,10 @@ export default function ConfirmModal({ busy, onConfirm, onCancel, title, subtitl
                         </p>
                         :
                         <>
-                            <button onClick={onConfirm} type='button' className={commonClass + " bg-red-btn"} >
+                            <button onClick={onConfirm} type='button' className={"p-1 text-white rounded bg-red-600"} >
                                 Confirm
                             </button>
-                            <button onClick={onCancel} type='button' className={commonClass + " bg-blue-btn"}>
+                            <button onClick={onCancel} type='button' className={"p-1 text-white rounded bg-highlight"}>
                                 Cancel
                             </button>
                         </>

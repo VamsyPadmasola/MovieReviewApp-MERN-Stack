@@ -4,13 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { createUser } from "../../api/auth";
 import { useAuth, useNotification } from "../../hooks";
 import { isValidEmail } from "../../utils/helper";
-import { commonModalClasses } from "../../utils/theme";
-import Container from "../Container";
 import CustomLink from "../CustomLink";
-import FormContainer from "../form/FormContainer";
 import FormInput from "../form/FormInput";
 import Submit from "../form/Submit";
-import Title from "../form/Title";
+import LeftContainer from "../LeftContainer";
 
 const validateUserInfo = ({ name, email, password }) => {
   const isValidName = /^[a-z A-Z]+$/;
@@ -53,9 +50,9 @@ export default function Signup() {
     if (!ok) return updateNotification("error", error);
 
     const response = await createUser(userInfo);
-    if (response.error) return console.log(response.error);
+    if (response.error) return updateNotification('error', response.error);
 
-    navigate("/auth/verification", {
+    navigate("/", {
       state: { user: response.user },
       replace: true,
     });
@@ -69,40 +66,49 @@ export default function Signup() {
   const { name, email, password } = userInfo;
 
   return (
-    <FormContainer>
-      <Container>
-        <form onSubmit={handleSubmit} className={commonModalClasses + " w-72"}>
-          <Title>Sign up</Title>
-          <FormInput
-            value={name}
-            onChange={handleChange}
-            label="Name"
-            placeholder="John Doe"
-            name="name"
-          />
-          <FormInput
-            value={email}
-            onChange={handleChange}
-            label="Email"
-            placeholder="john@email.com"
-            name="email"
-          />
-          <FormInput
-            value={password}
-            onChange={handleChange}
-            label="Password"
-            placeholder="********"
-            name="password"
-            type="password"
-          />
-          <Submit value="Sign up" />
-
-          <div className="flex justify-between">
-            <CustomLink to="/auth/forget-password">Forget password</CustomLink>
-            <CustomLink to="/auth/signin">Sign in</CustomLink>
+    <div className="flex bg-secondary w-full min-h-screen">
+      <LeftContainer />
+      <form className="w-[55%] flex items-center justify-center">
+        <div className="w-[60%] bg-white rounded">
+          <div className="bg-highlight w-full p-5 text-white text-center rounded">
+            <h1>Sign up</h1>
           </div>
-        </form>
-      </Container>
-    </FormContainer>
+          <div className="p-4 flex flex-col space-y-5">
+            <FormInput
+              value={name}
+              onChange={handleChange}
+              label="Name"
+              placeholder="John Doe"
+              name="name"
+            />
+            <FormInput
+              value={email}
+              onChange={handleChange}
+              label="Email"
+              placeholder="john@email.com"
+              name="email"
+            />
+            <FormInput
+              value={password}
+              onChange={handleChange}
+              label="Password"
+              placeholder="********"
+              name="password"
+              type="password"
+            />
+
+            <div className="flex items-center justify-center">
+              <Submit value="Sign up" onClick={handleSubmit} />
+            </div>
+
+            <div className="flex justify-between">
+              <CustomLink to="/auth/forget-password">Forget password</CustomLink>
+              <CustomLink to="/">Sign in</CustomLink>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div >
   );
 }

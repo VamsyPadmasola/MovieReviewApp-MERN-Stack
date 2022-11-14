@@ -2,6 +2,7 @@ import React from "react";
 import { BsFillSunFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth, useTheme } from "../../hooks";
+import Cart from "../Cart";
 import Container from "../Container";
 import AppSearchForm from "../form/AppSearchForm";
 
@@ -21,27 +22,19 @@ export default function Navbar() {
 			<Container className="p-2">
 				<div className="flex justify-between items-center">
 					<Link to="/" className="flex items-center space-x-2">
-						<img src="./logo.png" alt="" className="sm:h-8 h-6" />
-						<span className="text-white sm:text-lg text-sm">Movie Review</span>
+						<img src="logo_white.png" alt="" className="sm:h-8 h-6" />
+						<span className="text-white sm:text-lg text-sm">Restaurant Name</span>
 					</Link>
 
 					<ul className="flex items-center sm:space-x-4 space-x-2">
-						<li>
-							<button
-								onClick={toggleTheme}
-								className="dark:bg-white bg-dark-subtle p-1 rounded sm:text-2xl text-sm"
-							>
-								<BsFillSunFill className="text-secondary" />
-							</button>
-						</li>
-						<li>
+						{/* <li>
 							<AppSearchForm
 								placeholder="Search..."
 								inputClassName="border-dark-subtle text-white focus:border-white
 								sm:w-auto w-24 sm:h-10 h-8 "
 								onSubmit={handleSearchSubmit}
 							/>
-						</li>
+						</li> */}
 						<li>
 							{isLoggedIn ? (
 								<button
@@ -58,6 +51,11 @@ export default function Navbar() {
 									Login
 								</Link>
 							)}
+						</li>
+						<li>
+							<div className="cart-container">
+								<Cart />
+							</div>
 						</li>
 					</ul>
 				</div>

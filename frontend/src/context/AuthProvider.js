@@ -26,7 +26,7 @@ export default function AuthProvider({ children }) {
       return setAuthInfo({ ...authInfo, isPending: false, error });
     }
 
-    navigate("/", { replace: true });
+    navigate("/dashboard", { replace: true });
     setAuthInfo({
       profile: { ...user },
       isLoggedIn: true,

@@ -1,6 +1,4 @@
 const crypto = require('crypto')
-const cloudinary = require('../cloud')
-const Review = require("../models/review");
 
 exports.sendError = (res, errorMsg, statusCode = 401) => {
     res.status(statusCode).json({ error: errorMsg })
@@ -30,17 +28,28 @@ exports.uploadImageToCloud = async (file) => {
     return { url, public_id };
 };
 
-exports.formatActor = actor => {
-    const { name, gender, about, avatar, _id } = actor
+exports.formatCustomer = customer => {
+    const { name, email, contact, company, _id } = customer
     return {
         id: _id,
         name,
-        about,
-        gender,
-        avatar: avatar?.url
+        email,
+        contact,
+        company,
     }
 }
 
+exports.formatMenuItem = menu => {
+    const { name, description, type, price, image, _id } = menu
+    return {
+        id: _id,
+        name,
+        description,
+        type,
+        price,
+        image: image?.url
+    }
+}
 exports.averageRatingPipeline = (movieId) => {
     return [
         {
